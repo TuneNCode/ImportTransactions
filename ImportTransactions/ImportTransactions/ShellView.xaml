@@ -1,0 +1,50 @@
+<Window x:Class="ImportTransactions.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="450" Width="600">
+<DockPanel>
+    <Grid Margin="10, 20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" x:Name="LabelFileName" Content="Filename: " Margin="0,0,5,5"/>
+        <TextBox Grid.Row="0" Grid.Column="1" DockPanel.Dock="Left" x:Name="SelectedFileName" Margin="0,0,5,5"/>
+
+        <Button Grid.Row="0" Grid.Column="2"  x:Name="Browse" Height="30" Margin="5,0,5,0" >Browse</Button>
+        <Button Grid.Row="1" Grid.Column="1" x:Name="Import" Height="30" Margin="0,5">Import</Button>
+
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+            <Label Content="Validated "/>
+            <Label x:Name="ValidTransactionsCount"/>
+            <Label Content=" of "/>
+            <Label x:Name="TransactionLinesCount"/>
+            <Label Content=" transactions. "/>
+            <Label x:Name="InvalidTransactionsCount"/>
+            <Label Content=" invalid transaction(s). "/>
+        </StackPanel>
+        <ProgressBar Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Minimum="0" Maximum="100" x:Name="PercentageComplete" Height="20"/>
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
+            <Label>Invalid Transaction Lines</Label>
+            <ListBox  ItemsSource="{Binding FailedLines, NotifyOnSourceUpdated=True}" Height="200">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                            <TextBlock Text="{Binding }" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+
+
+    </Grid>
+    </DockPanel>
+</Window>
